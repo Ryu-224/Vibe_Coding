@@ -319,7 +319,7 @@ void quiz7(KingNode* root) {
         KingNode* parent = jeongjong->parent;
         KingNode* sibling = parent->first_child;
         while (sibling != NULL) {
-            if (strcmp(sibling->name, "정종종") != 0) {
+            if (strcmp(sibling->name, "정종") != 0) {
                 printf("%s ", sibling->name);
             }
             sibling = sibling->next_sibling;
