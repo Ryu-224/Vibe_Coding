@@ -7,7 +7,7 @@
 #define MAX_NAME_LENGTH 32
 #define MAX_KINGS 30
 
-// ¿ÕÀÇ Á¤º¸¸¦ ÀúÀåÇÏ´Â Æ®¸® ³ëµå ±¸Á¶Ã¼
+// ì™•ì˜ ì •ë³´ë¥¼ ì €ìž¥í•˜ëŠ” íŠ¸ë¦¬ ë…¸ë“œ êµ¬ì¡°ì²´
 typedef struct KingNode {
     char name[MAX_NAME_LENGTH];
     struct KingNode* parent;
@@ -15,7 +15,7 @@ typedef struct KingNode {
     struct KingNode* next_sibling;
 } KingNode;
 
-// ÇÔ¼ö ÇÁ·ÎÅäÅ¸ÀÔ ¼±¾ð
+// í•¨ìˆ˜ í”„ë¡œí† íƒ€ìž… ì„ ì–¸
 KingNode* create_node(const char* name);
 KingNode* find_node(KingNode* root, const char* name);
 void add_child(KingNode* parent, KingNode* child);
@@ -23,7 +23,7 @@ KingNode* build_dynasty_tree(const char* filename);
 void free_tree(KingNode* root);
 int get_all_kings(KingNode* root, KingNode** list);
 
-// ÄûÁî ÇÔ¼ö ÇÁ·ÎÅäÅ¸ÀÔ ¼±¾ð
+// í€´ì¦ˆ í•¨ìˆ˜ í”„ë¡œí† íƒ€ìž… ì„ ì–¸
 void print_dynasty_tree(KingNode* root);
 void quiz1(KingNode* root);
 void quiz2(KingNode* root);
@@ -38,71 +38,71 @@ void quiz10(KingNode* root);
 
 int main() {
 
-    // 1. Æ®¸® »ý¼º
-    KingNode* root = build_dynasty_tree("Á¶¼±¿ÕÁ¶.txt");
+    // 1. íŠ¸ë¦¬ ìƒì„±
+    KingNode* root = build_dynasty_tree("ì¡°ì„ ì™•ì¡°.txt");
     if (root == NULL) {
         return 1;
     }
 
-    // 2. »ý¼ºµÈ Æ®¸® ±¸Á¶ Ãâ·Â (ÀÌ ºÎºÐÀ» Ãß°¡)
+    // 2. ìƒì„±ëœ íŠ¸ë¦¬ êµ¬ì¡° ì¶œë ¥ (ì´ ë¶€ë¶„ì„ ì¶”ê°€)
     print_dynasty_tree(root);
 
-    printf("### Á¶¼± ¿ÕÁ¶ ÄûÁî ###\n\n");
+    printf("### ì¡°ì„  ì™•ì¡° í€´ì¦ˆ ###\n\n");
 
-    // 3. °¢ ÄûÁî ÇÔ¼ö¸¦ ¼ø¼­´ë·Î È£ÃâÇÏ°í °á°ú Ãâ·Â
-    printf("1. Á¶¼±ÀÇ ¿ÕÀ» ¼ø¼­´ë·Î Ãâ·ÂÇÏ½Ã¿À.\n > ");
+    // 3. ê° í€´ì¦ˆ í•¨ìˆ˜ë¥¼ ìˆœì„œëŒ€ë¡œ í˜¸ì¶œí•˜ê³  ê²°ê³¼ ì¶œë ¥
+    printf("1. ì¡°ì„ ì˜ ì™•ì„ ìˆœì„œëŒ€ë¡œ ì¶œë ¥í•˜ì‹œì˜¤.\n > ");
     quiz1(root);
     printf("\n");
 
-    printf("2. Á¶¼±ÀÇ ¿ÕÀ» ¿ª¼øÀ¸·Î Ãâ·ÂÇÏ½Ã¿À.\n > ");
+    printf("2. ì¡°ì„ ì˜ ì™•ì„ ì—­ìˆœìœ¼ë¡œ ì¶œë ¥í•˜ì‹œì˜¤.\n > ");
     quiz2(root);
     printf("\n");
 
-    printf("3. Á¶¼±ÀÇ ¿ÕÀº ¸ðµÎ ¸î ¸íÀÎ°¡?\n > ");
+    printf("3. ì¡°ì„ ì˜ ì™•ì€ ëª¨ë‘ ëª‡ ëª…ì¸ê°€?\n > ");
     quiz3(root);
     printf("\n");
 
-    printf("4. Á¶¼±ÀÇ ¿Õ Áß¿¡¼­ ÀÎÁ¶ÀÇ ÈÄ¼ÕÀº ´©±¸´©±¸ÀÎ°¡?\n > ");
+    printf("4. ì¡°ì„ ì˜ ì™• ì¤‘ì—ì„œ ì¸ì¡°ì˜ í›„ì†ì€ ëˆ„êµ¬ëˆ„êµ¬ì¸ê°€?\n > ");
     quiz4(root);
     printf("\n");
 
-    printf("5. Á÷°è ÈÄ¼ÕÀÌ ¿ÕÀÌ µÇÁö ¸øÇÑ ¿ÕÀº ´©±¸´©±¸ÀÎ°¡?\n > ");
+    printf("5. ì§ê³„ í›„ì†ì´ ì™•ì´ ë˜ì§€ ëª»í•œ ì™•ì€ ëˆ„êµ¬ëˆ„êµ¬ì¸ê°€?\n > ");
     quiz5(root);
     printf("\n");
 
-    printf("6. Á÷°è ÈÄ¼ÕÀÌ ¿ÕÀÌ µÈ ¼ö°¡ °¡Àå ¸¹Àº ¿ÕÀº ´©±¸ÀÎ°¡?\n > ");
+    printf("6. ì§ê³„ í›„ì†ì´ ì™•ì´ ëœ ìˆ˜ê°€ ê°€ìž¥ ë§Žì€ ì™•ì€ ëˆ„êµ¬ì¸ê°€?\n > ");
     quiz6(root);
     printf("\n");
 
-    printf("7. ¼±Á¶ÀÇ ÇüÁ¦·Î Á¶¼±ÀÇ ¿ÕÀÌ µÈ »ç¶÷Àº ´©±¸ÀÎ°¡?\n > ");
+    printf("7. ì„ ì¡°ì˜ í˜•ì œë¡œ ì¡°ì„ ì˜ ì™•ì´ ëœ ì‚¬ëžŒì€ ëˆ„êµ¬ì¸ê°€?\n > ");
     quiz7(root);
     printf("\n");
 
-    printf("8. ¼øÁ¾ÀÇ Á÷°è ¼±Á¶¸¦ ¸ðµÎ Ãâ·ÂÇÏ½Ã¿À.\n > ");
+    printf("8. ìˆœì¢…ì˜ ì§ê³„ ì„ ì¡°ë¥¼ ëª¨ë‘ ì¶œë ¥í•˜ì‹œì˜¤.\n > ");
     quiz8(root);
     printf("\n");
 
-    printf("9. Á÷°è ÈÄ¼ÕÀÌ 2¸í ÀÌ»ó ¿ÕÀÌ µÈ ¿ÕÀº ¸î ¸íÀÎ°¡?\n > ");
+    printf("9. ì§ê³„ í›„ì†ì´ 2ëª… ì´ìƒ ì™•ì´ ëœ ì™•ì€ ëª‡ ëª…ì¸ê°€?\n > ");
     quiz9(root);
     printf("\n");
 
-    printf("10. ¿¹Á¾Àº ÅÂÁ¾ÀÇ ¸î ´ë ÈÄ¼ÕÀÎ°¡?\n > ");
+    printf("10. ì˜ˆì¢…ì€ íƒœì¢…ì˜ ëª‡ ëŒ€ í›„ì†ì¸ê°€?\n > ");
     quiz10(root);
     printf("\n");
 
-    // 4. Æ®¸® ¸Þ¸ð¸® ÇØÁ¦
+    // 4. íŠ¸ë¦¬ ë©”ëª¨ë¦¬ í•´ì œ
     free_tree(root);
 
     return 0;
 }
 
-//--- Æ®¸® ±âº» ÇÔ¼öµé ---
+//--- íŠ¸ë¦¬ ê¸°ë³¸ í•¨ìˆ˜ë“¤ ---
 
-// »õ·Î¿î ³ëµå¸¦ »ý¼ºÇÏ°í ÃÊ±âÈ­
+// ìƒˆë¡œìš´ ë…¸ë“œë¥¼ ìƒì„±í•˜ê³  ì´ˆê¸°í™”
 KingNode* create_node(const char* name) {
     KingNode* new_node = (KingNode*)malloc(sizeof(KingNode));
     if (new_node == NULL) {
-        perror("¸Þ¸ð¸® ÇÒ´ç ½ÇÆÐ");
+        perror("ë©”ëª¨ë¦¬ í• ë‹¹ ì‹¤íŒ¨");
         exit(1);
     }
     strncpy(new_node->name, name, MAX_NAME_LENGTH - 1);
@@ -113,7 +113,7 @@ KingNode* create_node(const char* name) {
     return new_node;
 }
 
-// Æ®¸®¿¡¼­ Æ¯Á¤ ÀÌ¸§À» °¡Áø ³ëµå¸¦ °Ë»ö (ÀüÀ§ ¼øÈ¸ ¹æ½Ä)
+// íŠ¸ë¦¬ì—ì„œ íŠ¹ì • ì´ë¦„ì„ ê°€ì§„ ë…¸ë“œë¥¼ ê²€ìƒ‰ (ì „ìœ„ ìˆœíšŒ ë°©ì‹)
 KingNode* find_node(KingNode* current, const char* name) {
     if (current == NULL) {
         return NULL;
@@ -121,16 +121,16 @@ KingNode* find_node(KingNode* current, const char* name) {
     if (strcmp(current->name, name) == 0) {
         return current;
     }
-    // ÀÚ½Ä ³ëµå¿¡¼­ °Ë»ö
+    // ìžì‹ ë…¸ë“œì—ì„œ ê²€ìƒ‰
     KingNode* found_in_child = find_node(current->first_child, name);
     if (found_in_child != NULL) {
         return found_in_child;
     }
-    // ÇüÁ¦ ³ëµå¿¡¼­ °Ë»ö
+    // í˜•ì œ ë…¸ë“œì—ì„œ ê²€ìƒ‰
     return find_node(current->next_sibling, name);
 }
 
-// ºÎ¸ð ³ëµå¿¡ ÀÚ½Ä ³ëµå¸¦ Ãß°¡
+// ë¶€ëª¨ ë…¸ë“œì— ìžì‹ ë…¸ë“œë¥¼ ì¶”ê°€
 void add_child(KingNode* parent, KingNode* child) {
     child->parent = parent;
     if (parent->first_child == NULL) {
@@ -145,11 +145,11 @@ void add_child(KingNode* parent, KingNode* child) {
     }
 }
 
-// ÆÄÀÏ·ÎºÎÅÍ ¿ÕÁ¶ Æ®¸®¸¦ »ý¼º
+// íŒŒì¼ë¡œë¶€í„° ì™•ì¡° íŠ¸ë¦¬ë¥¼ ìƒì„±
 KingNode* build_dynasty_tree(const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
-        perror("ÆÄÀÏ ¿­±â ½ÇÆÐ");
+        perror("íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨");
         return NULL;
     }
 
@@ -157,7 +157,7 @@ KingNode* build_dynasty_tree(const char* filename) {
     char parent_name[MAX_NAME_LENGTH];
     KingNode* root = NULL;
 
-    // Ã¹ ÁÙ(ÅÂÁ¶)À» ÀÐ¾î ·çÆ® ³ëµå »ý¼º
+    // ì²« ì¤„(íƒœì¡°)ì„ ì½ì–´ ë£¨íŠ¸ ë…¸ë“œ ìƒì„±
     if (fscanf(file, "%s", king_name) == 1) {
         root = create_node(king_name);
     }
@@ -166,7 +166,7 @@ KingNode* build_dynasty_tree(const char* filename) {
         return NULL;
     }
 
-    // ³ª¸ÓÁö ¿ÕµéÀ» ÀÐ¾î Æ®¸®¿¡ Ãß°¡
+    // ë‚˜ë¨¸ì§€ ì™•ë“¤ì„ ì½ì–´ íŠ¸ë¦¬ì— ì¶”ê°€
     while (fscanf(file, "%s %s", king_name, parent_name) == 2) {
         KingNode* parent_node = find_node(root, parent_name);
         if (parent_node != NULL) {
@@ -179,7 +179,7 @@ KingNode* build_dynasty_tree(const char* filename) {
     return root;
 }
 
-// Æ®¸®ÀÇ ¸ðµç ³ëµå ¸Þ¸ð¸®¸¦ ÇØÁ¦ (ÈÄÀ§ ¼øÈ¸ ¹æ½Ä)
+// íŠ¸ë¦¬ì˜ ëª¨ë“  ë…¸ë“œ ë©”ëª¨ë¦¬ë¥¼ í•´ì œ (í›„ìœ„ ìˆœíšŒ ë°©ì‹)
 void free_tree(KingNode* current) {
     if (current == NULL) {
         return;
@@ -190,9 +190,9 @@ void free_tree(KingNode* current) {
 }
 
 
-//--- ÄûÁî ´äº¯À» À§ÇÑ ÇïÆÛ ÇÔ¼öµé ---
+//--- í€´ì¦ˆ ë‹µë³€ì„ ìœ„í•œ í—¬í¼ í•¨ìˆ˜ë“¤ ---
 
-// ÀüÀ§ ¼øÈ¸ÇÏ¸ç ³ëµå¸¦ ¹è¿­¿¡ ÀúÀå
+// ì „ìœ„ ìˆœíšŒí•˜ë©° ë…¸ë“œë¥¼ ë°°ì—´ì— ì €ìž¥
 void preorder_traversal(KingNode* node, KingNode** list, int* count) {
     if (node == NULL) {
         return;
@@ -203,14 +203,14 @@ void preorder_traversal(KingNode* node, KingNode** list, int* count) {
     preorder_traversal(node->next_sibling, list, count);
 }
 
-// Æ®¸®ÀÇ ¸ðµç ¿Õ ³ëµå¸¦ ¼ø¼­´ë·Î ¹è¿­¿¡ ´ã¾Æ ¹ÝÈ¯
+// íŠ¸ë¦¬ì˜ ëª¨ë“  ì™• ë…¸ë“œë¥¼ ìˆœì„œëŒ€ë¡œ ë°°ì—´ì— ë‹´ì•„ ë°˜í™˜
 int get_all_kings(KingNode* root, KingNode** list) {
     int count = 0;
     preorder_traversal(root, list, &count);
     return count;
 }
 
-// Æ¯Á¤ ³ëµåÀÇ ¸ðµç ÈÄ¼ÕÀ» Àç±ÍÀûÀ¸·Î Ãâ·Â
+// íŠ¹ì • ë…¸ë“œì˜ ëª¨ë“  í›„ì†ì„ ìž¬ê·€ì ìœ¼ë¡œ ì¶œë ¥
 void print_descendants(KingNode* node) {
     if (node == NULL) {
         return;
@@ -223,7 +223,7 @@ void print_descendants(KingNode* node) {
     }
 }
 
-// ¸®ÇÁ ³ëµå(ÀÚ½ÄÀÌ ¾ø´Â ¿Õ)¸¦ Ã£´Â Àç±Í ÇÔ¼ö
+// ë¦¬í”„ ë…¸ë“œ(ìžì‹ì´ ì—†ëŠ” ì™•)ë¥¼ ì°¾ëŠ” ìž¬ê·€ í•¨ìˆ˜
 void find_kings_without_heirs(KingNode* node) {
     if (node == NULL) {
         return;
@@ -235,7 +235,7 @@ void find_kings_without_heirs(KingNode* node) {
     find_kings_without_heirs(node->next_sibling);
 }
 
-// ³ëµåÀÇ Á÷°è ÀÚ½Ä ¼ö¸¦ °è»ê
+// ë…¸ë“œì˜ ì§ê³„ ìžì‹ ìˆ˜ë¥¼ ê³„ì‚°
 int count_direct_children(KingNode* node) {
     if (node == NULL || node->first_child == NULL) {
         return 0;
@@ -250,9 +250,9 @@ int count_direct_children(KingNode* node) {
 }
 
 
-//--- ÄûÁî 1~10¹ø ÇÔ¼ö ±¸Çö ---
+//--- í€´ì¦ˆ 1~10ë²ˆ í•¨ìˆ˜ êµ¬í˜„ ---
 
-// 1. Á¶¼±ÀÇ ¿ÕÀ» ¼ø¼­´ë·Î Ãâ·Â
+// 1. ì¡°ì„ ì˜ ì™•ì„ ìˆœì„œëŒ€ë¡œ ì¶œë ¥
 void quiz1(KingNode* root) {
     KingNode* king_list[MAX_KINGS];
     int count = get_all_kings(root, king_list);
@@ -262,7 +262,7 @@ void quiz1(KingNode* root) {
     printf("\n");
 }
 
-// 2. Á¶¼±ÀÇ ¿ÕÀ» ¿ª¼øÀ¸·Î Ãâ·Â
+// 2. ì¡°ì„ ì˜ ì™•ì„ ì—­ìˆœìœ¼ë¡œ ì¶œë ¥
 void quiz2(KingNode* root) {
     KingNode* king_list[MAX_KINGS];
     int count = get_all_kings(root, king_list);
@@ -272,29 +272,29 @@ void quiz2(KingNode* root) {
     printf("\n");
 }
 
-// 3. Á¶¼±ÀÇ ¿ÕÀº ¸ðµÎ ¸î ¸íÀÎ°¡?
+// 3. ì¡°ì„ ì˜ ì™•ì€ ëª¨ë‘ ëª‡ ëª…ì¸ê°€?
 void quiz3(KingNode* root) {
     KingNode* king_list[MAX_KINGS];
     int count = get_all_kings(root, king_list);
-    printf("%d¸í\n", count);
+    printf("%dëª…\n", count);
 }
 
-// 4. ÀÎÁ¶ÀÇ ÈÄ¼ÕÀº ´©±¸´©±¸ÀÎ°¡?
+// 4. ì¸ì¡°ì˜ í›„ì†ì€ ëˆ„êµ¬ëˆ„êµ¬ì¸ê°€?
 void quiz4(KingNode* root) {
-    KingNode* injo = find_node(root, "ÀÎÁ¶");
+    KingNode* injo = find_node(root, "ì¸ì¡°");
     if (injo != NULL) {
         print_descendants(injo);
     }
     printf("\n");
 }
 
-// 5. Á÷°è ÈÄ¼ÕÀÌ ¿ÕÀÌ µÇÁö ¸øÇÑ ¿ÕÀº?
+// 5. ì§ê³„ í›„ì†ì´ ì™•ì´ ë˜ì§€ ëª»í•œ ì™•ì€?
 void quiz5(KingNode* root) {
     find_kings_without_heirs(root);
     printf("\n");
 }
 
-// 6. Á÷°è ÈÄ¼ÕÀÌ ¿ÕÀÌ µÈ ¼ö°¡ °¡Àå ¸¹Àº ¿ÕÀº?
+// 6. ì§ê³„ í›„ì†ì´ ì™•ì´ ëœ ìˆ˜ê°€ ê°€ìž¥ ë§Žì€ ì™•ì€?
 void quiz6(KingNode* root) {
     KingNode* king_list[MAX_KINGS];
     int count = get_all_kings(root, king_list);
@@ -309,17 +309,17 @@ void quiz6(KingNode* root) {
             strcpy(king_name, king_list[i]->name);
         }
     }
-    printf("%s (%d¸í)\n", king_name, max_children);
+    printf("%s (%dëª…)\n", king_name, max_children);
 }
 
-// 7. Á¤Á¾ÀÇ ÇüÁ¦·Î Á¶¼±ÀÇ ¿ÕÀÌ µÈ »ç¶÷Àº?
+// 7. ì •ì¢…ì˜ í˜•ì œë¡œ ì¡°ì„ ì˜ ì™•ì´ ëœ ì‚¬ëžŒì€?
 void quiz7(KingNode* root) {
-    KingNode* jeongjong = find_node(root, "¼±Á¶");
+    KingNode* jeongjong = find_node(root, "ì •ì¢…");
     if (jeongjong != NULL && jeongjong->parent != NULL) {
         KingNode* parent = jeongjong->parent;
         KingNode* sibling = parent->first_child;
         while (sibling != NULL) {
-            if (strcmp(sibling->name, "¼±Á¶") != 0) {
+            if (strcmp(sibling->name, "ì •ì¢…ì¢…") != 0) {
                 printf("%s ", sibling->name);
             }
             sibling = sibling->next_sibling;
@@ -328,9 +328,9 @@ void quiz7(KingNode* root) {
     printf("\n");
 }
 
-// 8. ¼øÁ¾ÀÇ Á÷°è ¼±Á¶¸¦ ¸ðµÎ Ãâ·Â
+// 8. ìˆœì¢…ì˜ ì§ê³„ ì„ ì¡°ë¥¼ ëª¨ë‘ ì¶œë ¥
 void quiz8(KingNode* root) {
-    KingNode* sunjong = find_node(root, "¼øÁ¾");
+    KingNode* sunjong = find_node(root, "ìˆœì¢…");
     if (sunjong != NULL) {
         KingNode* current = sunjong->parent;
         while (current != NULL) {
@@ -341,7 +341,7 @@ void quiz8(KingNode* root) {
     printf("\n");
 }
 
-// 9. Á÷°è ÈÄ¼ÕÀÌ 2¸í ÀÌ»ó ¿ÕÀÌ µÈ ¿ÕÀº ¸î ¸íÀÎ°¡?
+// 9. ì§ê³„ í›„ì†ì´ 2ëª… ì´ìƒ ì™•ì´ ëœ ì™•ì€ ëª‡ ëª…ì¸ê°€?
 void quiz9(KingNode* root) {
     KingNode* king_list[MAX_KINGS];
     int total_kings = get_all_kings(root, king_list);
@@ -352,13 +352,13 @@ void quiz9(KingNode* root) {
             count++;
         }
     }
-    printf("%d¸í\n", count);
+    printf("%dëª…\n", count);
 }
 
-// 10. ¿¹Á¾Àº ÅÂÁ¾ÀÇ ¸î ´ë ÈÄ¼ÕÀÎ°¡?
+// 10. ì˜ˆì¢…ì€ íƒœì¢…ì˜ ëª‡ ëŒ€ í›„ì†ì¸ê°€?
 void quiz10(KingNode* root) {
-    KingNode* yejong = find_node(root, "¿¹Á¾");
-    KingNode* taejong = find_node(root, "ÅÂÁ¾");
+    KingNode* yejong = find_node(root, "ì˜ˆì¢…");
+    KingNode* taejong = find_node(root, "íƒœì¢…");
     int generations = 0;
 
     if (yejong && taejong) {
@@ -368,40 +368,40 @@ void quiz10(KingNode* root) {
             generations++;
         }
         if (current == taejong) {
-            printf("%d´ë ÈÄ¼Õ\n", generations);
+            printf("%dëŒ€ í›„ì†\n", generations);
         }
         else {
-            printf("Á÷°è °ü°è°¡ ¾Æ´Õ´Ï´Ù.\n");
+            printf("ì§ê³„ ê´€ê³„ê°€ ì•„ë‹™ë‹ˆë‹¤.\n");
         }
     }
 }
 
-//--- Æ®¸® ±¸Á¶ ½Ã°¢È­ Ãâ·Â ÇÔ¼ö ---
+//--- íŠ¸ë¦¬ êµ¬ì¡° ì‹œê°í™” ì¶œë ¥ í•¨ìˆ˜ ---
 
 /**
- * @brief Àç±ÍÀûÀ¸·Î Æ®¸® ±¸Á¶¸¦ Ãâ·ÂÇÏ´Â ÇïÆÛ ÇÔ¼ö
- * @param node ÇöÀç Ãâ·ÂÇÒ ³ëµå
- * @param prefix ÇöÀç ³ëµå ÀÌ¸§ ¾Õ¿¡ ºÙÀÏ Á¢µÎ»ç ¹®ÀÚ¿­ (¿¹: "¦¢   ")
- * @param is_last ÇöÀç ³ëµå°¡ ÇüÁ¦ ³ëµå Áß ¸¶Áö¸·ÀÎÁö¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
+ * @brief ìž¬ê·€ì ìœ¼ë¡œ íŠ¸ë¦¬ êµ¬ì¡°ë¥¼ ì¶œë ¥í•˜ëŠ” í—¬í¼ í•¨ìˆ˜
+ * @param node í˜„ìž¬ ì¶œë ¥í•  ë…¸ë“œ
+ * @param prefix í˜„ìž¬ ë…¸ë“œ ì´ë¦„ ì•žì— ë¶™ì¼ ì ‘ë‘ì‚¬ ë¬¸ìžì—´ (ì˜ˆ: "â”‚   ")
+ * @param is_last í˜„ìž¬ ë…¸ë“œê°€ í˜•ì œ ë…¸ë“œ ì¤‘ ë§ˆì§€ë§‰ì¸ì§€ë¥¼ ë‚˜íƒ€ë‚´ëŠ” í”Œëž˜ê·¸
  */
 void print_tree_recursive(KingNode* node, const char* prefix, int is_last) {
     if (node == NULL) {
         return;
     }
 
-    // 1. ÇöÀç ³ëµå Á¤º¸ Ãâ·Â (Á¢µÎ»ç + ¿¬°á¼± + ¿Õ ÀÌ¸§)
+    // 1. í˜„ìž¬ ë…¸ë“œ ì •ë³´ ì¶œë ¥ (ì ‘ë‘ì‚¬ + ì—°ê²°ì„  + ì™• ì´ë¦„)
     printf("%s", prefix);
-    printf("%s", is_last ? "¦¦¦¡ " : "¦§¦¡ "); // ¸¶Áö¸· ÀÚ½ÄÀÌ¸é '¦¦¦¡', ¾Æ´Ï¸é '¦§¦¡'
+    printf("%s", is_last ? "â””â”€ " : "â”œâ”€ "); // ë§ˆì§€ë§‰ ìžì‹ì´ë©´ 'â””â”€', ì•„ë‹ˆë©´ 'â”œâ”€'
     printf("%s\n", node->name);
 
-    // 2. ÀÚ½Ä ³ëµåµé¿¡°Ô Àü´ÞÇÒ »õ·Î¿î Á¢µÎ»ç ¹®ÀÚ¿­À» ¸¸µì´Ï´Ù.
-    char new_prefix[512]; // Á¢µÎ»ç ¹®ÀÚ¿­À» ÀúÀåÇÒ ¹öÆÛ
-    snprintf(new_prefix, sizeof(new_prefix), "%s%s", prefix, is_last ? "    " : "¦¢   ");
+    // 2. ìžì‹ ë…¸ë“œë“¤ì—ê²Œ ì „ë‹¬í•  ìƒˆë¡œìš´ ì ‘ë‘ì‚¬ ë¬¸ìžì—´ì„ ë§Œë“­ë‹ˆë‹¤.
+    char new_prefix[512]; // ì ‘ë‘ì‚¬ ë¬¸ìžì—´ì„ ì €ìž¥í•  ë²„í¼
+    snprintf(new_prefix, sizeof(new_prefix), "%s%s", prefix, is_last ? "    " : "â”‚   ");
 
-    // 3. ¸ðµç ÀÚ½Ä ³ëµå¸¦ ¼øÈ¸ÇÏ¸ç Àç±ÍÀûÀ¸·Î ÇÔ¼ö¸¦ È£ÃâÇÕ´Ï´Ù.
+    // 3. ëª¨ë“  ìžì‹ ë…¸ë“œë¥¼ ìˆœíšŒí•˜ë©° ìž¬ê·€ì ìœ¼ë¡œ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
     KingNode* child = node->first_child;
     while (child != NULL) {
-        // ´ÙÀ½ ÇüÁ¦ ³ëµå°¡ ¾ø´Â °æ¿ì, ÇöÀç ÀÚ½ÄÀÌ ¸¶Áö¸·ÀÔ´Ï´Ù.
+        // ë‹¤ìŒ í˜•ì œ ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°, í˜„ìž¬ ìžì‹ì´ ë§ˆì§€ë§‰ìž…ë‹ˆë‹¤.
         int last_sibling = (child->next_sibling == NULL);
         print_tree_recursive(child, new_prefix, last_sibling);
         child = child->next_sibling;
@@ -409,19 +409,19 @@ void print_tree_recursive(KingNode* node, const char* prefix, int is_last) {
 }
 
 /**
- * @brief ¿ÕÁ¶ Æ®¸® ±¸Á¶ Ãâ·ÂÀ» ½ÃÀÛÇÏ´Â ¸ÞÀÎ ÇÔ¼ö
- * @param root Æ®¸®ÀÇ ·çÆ® ³ëµå
+ * @brief ì™•ì¡° íŠ¸ë¦¬ êµ¬ì¡° ì¶œë ¥ì„ ì‹œìž‘í•˜ëŠ” ë©”ì¸ í•¨ìˆ˜
+ * @param root íŠ¸ë¦¬ì˜ ë£¨íŠ¸ ë…¸ë“œ
  */
 void print_dynasty_tree(KingNode* root) {
     if (root == NULL) {
-        printf("Æ®¸®°¡ ºñ¾îÀÖ½À´Ï´Ù.\n");
+        printf("íŠ¸ë¦¬ê°€ ë¹„ì–´ìžˆìŠµë‹ˆë‹¤.\n");
         return;
     }
-    printf("\n--- Á¶¼± ¿ÕÁ¶ Æ®¸® ±¸Á¶ ---\n");
-    // ·çÆ® ³ëµå¸¦ ¸ÕÀú Ãâ·ÂÇÕ´Ï´Ù.
+    printf("\n--- ì¡°ì„  ì™•ì¡° íŠ¸ë¦¬ êµ¬ì¡° ---\n");
+    // ë£¨íŠ¸ ë…¸ë“œë¥¼ ë¨¼ì € ì¶œë ¥í•©ë‹ˆë‹¤.
     printf("%s\n", root->name);
 
-    // ·çÆ®ÀÇ Á÷°è ÀÚ½ÄµéºÎÅÍ Àç±ÍÀû Ãâ·ÂÀ» ½ÃÀÛÇÕ´Ï´Ù.
+    // ë£¨íŠ¸ì˜ ì§ê³„ ìžì‹ë“¤ë¶€í„° ìž¬ê·€ì  ì¶œë ¥ì„ ì‹œìž‘í•©ë‹ˆë‹¤.
     KingNode* child = root->first_child;
     while (child != NULL) {
         int is_last = (child->next_sibling == NULL);
